@@ -5,7 +5,7 @@ class Reviews {
     constructor() {
         this.reviews = [];
     }
-    addReview(page, review_text, rating_dealership, rating_employee_avg, num_employee_ratings, num_exclamations) {
+    addReview(page, review_text, rating_dealership, rating_employee_avg, num_employee_ratings, num_exclamations, reviewer_username) {
         this.reviews.push({
             page,
             review_text,
@@ -13,6 +13,7 @@ class Reviews {
             rating_employee_avg,
             num_employee_ratings,
             num_exclamations,
+            reviewer_username,
         });
     }
     // Returns all the reviews

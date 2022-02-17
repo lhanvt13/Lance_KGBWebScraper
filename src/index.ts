@@ -60,6 +60,13 @@ function getReviews(html: string, page: number) {
     $(".review-entry").each((i, div) => {
         const review_title: string = $(div).find(".review-title").text(); // Bolded part of the review's text
         const review_text: string = $(div).find(".review-whole").text(); // Unbolded part of the review's text
+        const reviewer_username: string = $(div)
+            .find(".review-wrapper")
+            .children(":first-child")
+            .next()
+            .text()
+            .replace(/\s+/g, "")
+            .substring(2); // grab the username of the reviewer; .substring(2) gets rid of the "by" before the username
         const rating: number = extractDealershipRating(div) || 0; // get the rating for the dealership
         const { employee_ratings_avg, num_employee_ratings } =
             extractEmployeeRatings(div); // get the ratings and the number of ratings made for individual employees
@@ -78,7 +85,8 @@ function getReviews(html: string, page: number) {
             rating,
             employee_ratings_avg,
             num_employee_ratings,
-            num_exclamations
+            num_exclamations,
+            reviewer_username
         );
     });
 }

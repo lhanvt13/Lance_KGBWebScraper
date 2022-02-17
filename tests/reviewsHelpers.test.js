@@ -12,7 +12,8 @@ describe("Testing review helper functions", () => {
             50,
             5,
             2,
-            2
+            2,
+            "user_id"
         );
         let review_to_calculate = rev.getAllReviews()[0];
 

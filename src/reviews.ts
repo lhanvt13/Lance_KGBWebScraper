@@ -14,7 +14,8 @@ export default class Reviews {
         rating_dealership: number,
         rating_employee_avg: number,
         num_employee_ratings: number,
-        num_exclamations: number
+        num_exclamations: number,
+        reviewer_username: string
     ) {
         this.reviews.push({
             page,
@@ -23,6 +24,7 @@ export default class Reviews {
             rating_employee_avg,
             num_employee_ratings,
             num_exclamations,
+            reviewer_username,
         });
     }
 

@@ -5,4 +5,5 @@ export interface ReviewObj {
     rating_employee_avg: number;
     num_employee_ratings: number;
     num_exclamations: number;
+    reviewer_username: string;
 }

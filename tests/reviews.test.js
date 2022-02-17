@@ -14,7 +14,8 @@ describe("Testing Reviews functions", () => {
             50,
             5,
             2,
-            0
+            0,
+            "user_id"
         );
         expect(rev.getAllReviews()).toEqual([
             {
@@ -25,6 +26,7 @@ describe("Testing Reviews functions", () => {
                 rating_employee_avg: 5,
                 num_employee_ratings: 2,
                 num_exclamations: 0,
+                reviewer_username: "user_id",
             },
         ]);
     });
@@ -36,7 +38,8 @@ describe("Testing Reviews functions", () => {
             50,
             5,
             2,
-            0
+            0,
+            "user_id1"
         );
         rev.addReview(
             0,
@@ -44,7 +47,8 @@ describe("Testing Reviews functions", () => {
             40,
             3,
             4,
-            0
+            0,
+            "user_id2"
         );
         rev.addReview(
             1,
@@ -52,7 +56,8 @@ describe("Testing Reviews functions", () => {
             22,
             1,
             1,
-            0
+            0,
+            "user_id3"
         );
         expect(rev.getAllReviews()).toEqual([
             {
@@ -63,6 +68,7 @@ describe("Testing Reviews functions", () => {
                 rating_employee_avg: 5,
                 num_employee_ratings: 2,
                 num_exclamations: 0,
+                reviewer_username: "user_id1",
             },
             {
                 page: 0,
@@ -72,6 +78,7 @@ describe("Testing Reviews functions", () => {
                 rating_employee_avg: 3,
                 num_employee_ratings: 4,
                 num_exclamations: 0,
+                reviewer_username: "user_id2",
             },
             {
                 page: 1,
@@ -81,6 +88,7 @@ describe("Testing Reviews functions", () => {
                 rating_employee_avg: 1,
                 num_employee_ratings: 1,
                 num_exclamations: 0,
+                reviewer_username: "user_id3",
             },
         ]);
     });
@@ -101,7 +109,8 @@ describe("Testing get top reviews", () => {
                 getRandomInt(50),
                 getRandomInt(5),
                 getRandomInt(5),
-                1
+                1,
+                `user_id`
             );
         }
         rev.addReview(
@@ -110,10 +119,27 @@ describe("Testing get top reviews", () => {
             60,
             6,
             6,
-            6
+            6,
+            "user_id1"
         );
-        rev.addReview(1, "This is another highly rated comment", 70, 7, 7, 7);
-        rev.addReview(2, "This is a highly rated comment", 80, 8, 8, 7);
+        rev.addReview(
+            1,
+            "This is another highly rated comment",
+            70,
+            7,
+            7,
+            7,
+            "user_id2"
+        );
+        rev.addReview(
+            2,
+            "This is a highly rated comment",
+            80,
+            8,
+            8,
+            8,
+            "user_id3"
+        );
         expect(rev.getTopReviews(3)).toEqual([
             {
                 page: 2,
@@ -121,7 +147,8 @@ describe("Testing get top reviews", () => {
                 rating_dealership: 80,
                 rating_employee_avg: 8,
                 num_employee_ratings: 8,
-                num_exclamations: 7,
+                num_exclamations: 8,
+                reviewer_username: "user_id3",
             },
             {
                 page: 1,
@@ -130,6 +157,7 @@ describe("Testing get top reviews", () => {
                 rating_employee_avg: 7,
                 num_employee_ratings: 7,
                 num_exclamations: 7,
+                reviewer_username: "user_id2",
             },
             {
                 page: 0,
@@ -138,14 +166,31 @@ describe("Testing get top reviews", () => {
                 rating_employee_avg: 6,
                 num_employee_ratings: 6,
                 num_exclamations: 6,
+                reviewer_username: "user_id1",
             },
         ]);
     });
     test("top 3 reviews when less than 3 reviews are added", () => {
         let rev = new Reviews();
 
-        rev.addReview(0, "This is a highly rated comment", 50, 5, 5, 5);
-        rev.addReview(0, "This is another highly rated comment", 60, 6, 6, 6);
+        rev.addReview(
+            0,
+            "This is a highly rated comment",
+            50,
+            5,
+            5,
+            5,
+            "user_id1"
+        );
+        rev.addReview(
+            0,
+            "This is another highly rated comment",
+            60,
+            6,
+            6,
+            6,
+            "user_id2"
+        );
         expect(rev.getTopReviews(3)).toEqual([
             {
                 page: 0,
@@ -154,6 +199,7 @@ describe("Testing get top reviews", () => {
                 rating_employee_avg: 6,
                 num_employee_ratings: 6,
                 num_exclamations: 6,
+                reviewer_username: "user_id2",
             },
             {
                 page: 0,
@@ -162,6 +208,7 @@ describe("Testing get top reviews", () => {
                 rating_employee_avg: 5,
                 num_employee_ratings: 5,
                 num_exclamations: 5,
+                reviewer_username: "user_id1",
             },
         ]);
     });

@@ -63,13 +63,23 @@ function getReviews(html, page) {
     $(".review-entry").each((i, div) => {
         const review_title = $(div).find(".review-title").text(); // Bolded part of the review's text
         const review_text = $(div).find(".review-whole").text(); // Unbolded part of the review's text
+        const reviewer_username = $(div)
+            .find(".review-wrapper")
+            .children(":first-child")
+            .next()
+            .text()
+            .replace(/\s+/g, "")
+            .substring(2); // grab the username of the reviewer; .substring(2) gets rid of the "by" before the username
         const rating = (0, ratingsHelpers_1.extractDealershipRating)(div) || 0; // get the rating for the dealership
         const { employee_ratings_avg, num_employee_ratings } = (0, ratingsHelpers_1.extractEmployeeRatings)(div); // get the ratings and the number of ratings made for individual employees
         const num_exclamations = review_title.split("!").length -
             1 +
             (review_text.split("!").length - 1); // grab how many exclamations there are
         // add the review to the reviews_list
-        reviews_list.addReview(page, `${review_title}${review_text}`, rating, employee_ratings_avg, num_employee_ratings, num_exclamations);
+        /**
+         * (page: number, review_text: string, rating_dealership: number, rating_employee_avg: number, num_employee_ratings: number, num_exclamations: number)
+         */
+        reviews_list.addReview(page, `${review_title}${review_text}`, rating, employee_ratings_avg, num_employee_ratings, num_exclamations, reviewer_username);
     });
 }
 main();
