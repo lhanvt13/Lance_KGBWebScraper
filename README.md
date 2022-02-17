@@ -1,13 +1,15 @@
-##How to run:##
+How to run:
 
 1. install all packages
-    - : `npm install`
+    - `npm install`
+    - optional ts install: `npm install typescript`. Sometimes not properly installed via `npm install` for some reason
 2. Run the program
     - `npm start`
 
 How to run tests:
 
 1. run tests
+    - Using Jest
     - `npm test`
 
 Calculating "overly positive" comments:
